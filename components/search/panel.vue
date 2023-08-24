@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card search-panel">
-    <h1 class="search-panel__title">
+    <h1 class="page-title">
       Let's find a movie!
     </h1>
     <search-form/>

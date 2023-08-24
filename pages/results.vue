@@ -1,18 +1,17 @@
 <template>
   <Head>
-    <Title>MovieFinder</Title>
+    <Title>Results</Title>
   </Head>
   <el-row
-    :gutter="20"
     justify="center"
   >
-    <el-col
-      :xs="24"
-      :md="20"
-      :lg="10"
-      :xl="8"
-    >
-      <SearchPanel/>
+    <el-col>
+      <h1 class="page-title">
+        Results
+      </h1>
+    </el-col>
+    <el-col>
+      
     </el-col>
   </el-row>
 </template>
@@ -22,4 +21,5 @@
     layout: 'default'
   })
 </script>
+
 

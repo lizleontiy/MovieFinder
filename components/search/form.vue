@@ -43,10 +43,13 @@
   })
   
   const onSuccess = () => {
-    console.log('valid')
+    return navigateTo({
+      path: '/results',
+      query: {
+        search: form.value.search,
+      }
+  })
   }
-  const onError = () => {
-    console.log('invalid')
-  }
-  const submitForm = useSubmitForm(onSuccess, onError)
+
+  const submitForm = useSubmitForm(onSuccess)
 </script>

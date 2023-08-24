@@ -1,8 +1,5 @@
 <template>
   <div>
-    <Head>
-      <Title>MovieFinder</Title>
-    </Head>
     <el-container
       direction="vertical"
       :style="style"
