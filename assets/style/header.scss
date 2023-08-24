@@ -1,0 +1,12 @@
+.el-header {
+  --el-header-padding: 20px 20px!important;
+  background-color: #ffffff7d;
+}
+
+.header {
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--el-color-primary);
+  }
+}
