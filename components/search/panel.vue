@@ -1,10 +1,10 @@
 <template>
-  <el-card class="box-card search-panel">
-    <h1 class="search-panel__title">
+  <ElCard class="box-card search-panel">
+    <h1 class="page-title">
       Let's find a movie!
     </h1>
-    <search-form/>
-  </el-card>
+    <SearchForm/>
+  </ElCard>
 </template>
 
 <style lang="scss">

@@ -1,25 +1,25 @@
 <template>
-  <el-form
+  <ElForm
     ref="formRef"
     :model="form"
     :rules="rules"
     class="demo-ruleForm"
   >
-    <el-form-item prop="search">
-      <el-input
+    <ElFormItem prop="search">
+      <ElInput
         placeholder="Search..."
         v-model="form.search"
         @keydown.enter.prevent="submitForm(formRef)"
       >
         <template #append>
-          <el-button
+          <ElButton
             :icon="Search"
             @click="submitForm(formRef)"
           />
         </template>
-      </el-input>
-    </el-form-item>
-  </el-form>
+      </ElInput>
+    </ElFormItem>
+  </ElForm>
 </template>
 
 <script setup lang="ts">
@@ -43,10 +43,13 @@
   })
   
   const onSuccess = () => {
-    console.log('valid')
+    return navigateTo({
+      path: '/results',
+      query: {
+        search: form.value.search,
+      }
+    })
   }
-  const onError = () => {
-    console.log('invalid')
-  }
-  const submitForm = useSubmitForm(onSuccess, onError)
+
+  const submitForm = useSubmitForm(onSuccess)
 </script>

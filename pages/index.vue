@@ -1,17 +1,20 @@
 <template>
-  <el-row
+  <Head>
+    <Title>MovieFinder</Title>
+  </Head>
+  <ElRow
     :gutter="20"
     justify="center"
   >
-    <el-col
+    <ElCol
       :xs="24"
       :md="20"
       :lg="10"
       :xl="8"
     >
       <SearchPanel/>
-    </el-col>
-  </el-row>
+    </ElCol>
+  </ElRow>
 </template>
 
 <script setup>

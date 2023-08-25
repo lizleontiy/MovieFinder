@@ -1,9 +1,6 @@
 <template>
   <div>
-    <Head>
-      <Title>MovieFinder</Title>
-    </Head>
-    <el-container
+    <ElContainer
       direction="vertical"
       :style="style"
     >
@@ -12,12 +9,11 @@
         <slot/>
       </ElMain>
       <LayoutFooter/>
-    </el-container>
+    </ElContainer>
   </div>
 </template>
 
 <script setup>
-
   const style = {
     backgroundImage: 'url(/img/denise-jans-RM-5zzFsR2I-unsplash.jpg)'
   }

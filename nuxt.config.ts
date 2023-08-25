@@ -10,7 +10,17 @@ export default defineNuxtConfig({
     '~/assets/style/footer.scss'
   ],
   modules: [
-    '@pinia/nuxt',
+    ['@pinia/nuxt', { disableVuex: true }],
     '@element-plus/nuxt',
+    'nuxt-swiper',
   ],
+  runtimeConfig: {
+    public: {
+      OMDB_API_KEY: '30468e4f',
+      OMDB_PATH: 'http://www.omdbapi.com/'
+    }
+  },
+  swiper: {
+    modules: ['navigation']
+  }
 })
