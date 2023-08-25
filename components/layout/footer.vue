@@ -1,10 +1,10 @@
 <template>
-  <el-footer>
-    <el-text
+  <ElFooter>
+    <ElText
       size="small"
       type="primary"
     >
       © 2023 MovieFinder
-    </el-text>
-  </el-footer>
+    </ElText>
+  </ElFooter>
 </template>
