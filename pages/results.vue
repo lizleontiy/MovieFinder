@@ -42,15 +42,16 @@
 
   onMounted(() => {
     updateIsLoadingMovies(true)
-    useMovieSearch(route.query.search).then((data: MovieResponse) => {
+    useMovieSearch<MovieResponse>({s: route.query.search}).then((data: MovieResponse) => {
       const response: MovieResponse = data
+      updateIsLoadingMovies(false)
       if (response.Response === 'True') {
-        updateIsLoadingMovies(false)
         updateMovies(response.Search as Movie[])
       } else {
-        updateIsLoadingMovies(false)
         isNoResults.value = true
       }
+    }).catch((err) => {
+      console.warn(err)
     })
   })
 
