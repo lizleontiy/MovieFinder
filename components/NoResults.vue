@@ -12,7 +12,7 @@
         size="large"
         type="primary"
       >
-        Try Again
+        Home
       </ElButton>
     </NuxtLink>
   </ElRow>

@@ -18,7 +18,7 @@
 <script setup lang="ts">
  const isRoot = ref(true)
 
-  const route = useRoute();
+  const route = useRoute()
 
   watch(() => route.fullPath, (value) => {
     isRoot.value = value === '/'
