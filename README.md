@@ -61,3 +61,9 @@ yarn preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Pages
+Home: `http://localhost:3000`
+Search results: `http://localhost:3000/results`
+Details: `http://localhost:3000//movie/details`
+Form: `http://localhost:3000//movie/form`

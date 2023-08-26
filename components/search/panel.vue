@@ -8,5 +8,5 @@
 </template>
 
 <style lang="scss">
-  @import "~/assets/style/search-panel.scss"
+  @import "~/assets/style/components/search-panel.scss"
 </style>
