@@ -16,11 +16,15 @@
 </template>
 
 <script setup lang="ts">
- const isRoot = ref(true)
+  import { PAGE } from '@/utils/const'
 
+  const isRoot = ref(true)
   const route = useRoute()
 
   watch(() => route.fullPath, (value) => {
-    isRoot.value = value === '/'
-  }, {deep: true, immediate: true})
+    isRoot.value = value === PAGE.INDEX
+  }, {
+    deep: true,
+    immediate: true
+  })
 </script>

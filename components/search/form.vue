@@ -26,10 +26,8 @@
   import { Search } from '@element-plus/icons-vue'
   import { reactive, ref } from 'vue'
   import type { FormRules, FormInstance } from 'element-plus'
-
-  interface SearchForm {
-    search: string,
-  }
+  import { SearchForm } from '@/types/Search'
+  import { PAGE } from '@/utils/const'
 
   const form = ref<SearchForm>({
     search: ''
@@ -37,14 +35,14 @@
   const formRef = ref<FormInstance>()
   const rules = reactive<FormRules<SearchForm>>({
     search: [
-      { required: true, message: 'Please input Activity name', trigger: 'blur' },
+      { required: true, message: 'Please fill input', trigger: 'blur' },
       { min: 3, message: 'Length should be more than 3', trigger: 'blur' },
     ],
   })
   
   const onSuccess = () => {
     return navigateTo({
-      path: '/results',
+      path: PAGE.RESULTS,
       query: {
         search: form.value.search,
       }

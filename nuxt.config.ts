@@ -6,8 +6,8 @@ export default defineNuxtConfig({
   css: [
     '~/assets/style/reset.scss',
     '~/assets/style/general.scss',
-    '~/assets/style/header.scss',
-    '~/assets/style/footer.scss'
+    '~/assets/style/layout/header.scss',
+    '~/assets/style/layout/footer.scss'
   ],
   modules: [
     ['@pinia/nuxt', { disableVuex: true }],

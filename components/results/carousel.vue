@@ -13,8 +13,9 @@
   </Swiper>
 </template>
 <script setup lang="ts">
-
   import { Movie } from '@/types/Movie'
+  import { PAGE } from '@/utils/const'
+
   const breakpoints = {
     '640': {
       slidesPerView: 2,
@@ -26,14 +27,14 @@
     },
   }
 
-  const props = defineProps<{
+  const { movies } = defineProps<{
     movies: Movie[],
   }>()
 
   function goToMoviePage(title: string) {
     localStorage.setItem('title', title)
     return navigateTo({
-      path: `/movie/details`,
+      path: PAGE.DETAILS,
     })
   }
 </script>
