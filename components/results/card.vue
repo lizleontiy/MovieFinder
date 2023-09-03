@@ -24,5 +24,5 @@
 </script>
 
 <style lang="scss">
-@import "~/assets/style/movie-card.scss"
+@import "~/assets/style/components/movie-card.scss"
 </style>

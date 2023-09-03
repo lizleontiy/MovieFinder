@@ -91,5 +91,5 @@
 </script>
 
 <style lang="scss">
-  @import "~/assets/style/details.scss"
+  @import "~/assets/style/components/details.scss"
 </style>
