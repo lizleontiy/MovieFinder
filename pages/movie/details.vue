@@ -58,19 +58,20 @@
   import { storeToRefs } from 'pinia'
   import { MovieDetails } from '@/types/MovieDetails'
   import { useMoviesStore } from '@/stores/movies'
+  import { LocationQueryValue } from '#vue-router'
 
-  const movieTitle = ref<string | null>('')
-  const movieDetails = ref<MovieDetails>({} as MovieDetails)
+  const route = useRoute()
   const movieStore = useMoviesStore()
+  const movieTitle = ref<string | LocationQueryValue[]>('')
+  const movieDetails = ref<MovieDetails>({} as MovieDetails)
   const { updateIsLoadingMovieDetails } = movieStore
   const { isLoadingMovieDetails } = storeToRefs(movieStore)
   const isNoResults = ref(false)
   const poster = ref('')
-
   onMounted(() => {
-    movieTitle.value = localStorage.getItem('title') || ''
+    movieTitle.value = route.query.id || ''
     updateIsLoadingMovieDetails(true)
-    useMovieSearch<MovieDetails>({t: movieTitle.value}).then(({Title, Year, Director, Poster, Response}) => {
+    useMovieSearch<MovieDetails>({i: movieTitle.value}).then(({Title, Year, Director, Poster, Response}) => {
       if (Response === 'True') {
         isNoResults.value = false
         updateIsLoadingMovieDetails(false)

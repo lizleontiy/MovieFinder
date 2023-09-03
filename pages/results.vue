@@ -20,7 +20,15 @@
       :xl="14"
     >
       <ResultsCarousel
-        :movies="movies"/>
+        v-slot="{item}"
+        :data="movies"
+        :breakpoints="breakpoints"
+      >
+        <ResultsCard
+          :movie="item"
+          @click="goToMoviePage(item.imdbID)"
+        />
+      </ResultsCarousel>
     </ElCol>
   </ElRow>
 </template>
@@ -29,16 +37,17 @@
   definePageMeta({
     layout: 'default'
   })
+
   import { MovieResponse, Movie } from '@/types/Movie'
   import { storeToRefs } from 'pinia'
   import { useMoviesStore } from '@/stores/movies'
-  const loading = ref(true)
-  const isNoResults = ref(false)
+
+  const route = useRoute()
   const movieStore = useMoviesStore()
   const { movies, isLoadingMovies } = storeToRefs(movieStore)
   const { updateIsLoadingMovies, updateMovies } = movieStore
-
-  const route = useRoute()
+  const loading = ref(true)
+  const isNoResults = ref(false)
 
   onMounted(() => {
     updateIsLoadingMovies(true)
@@ -60,4 +69,24 @@
       loading.value = false
     }
   })
+
+  const goToMoviePage = (id: string) =>  {
+    return navigateTo({
+      path: `/movie/details`,
+      query: {
+        id,
+      }
+    })
+  }
+
+  const breakpoints = {
+    '640': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '1024': {
+      slidesPerView: 3,
+      spaceBetween: 50,
+    },
+  }
 </script>
