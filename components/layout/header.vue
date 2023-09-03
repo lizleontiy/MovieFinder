@@ -18,8 +18,8 @@
 <script setup lang="ts">
   import { PAGE } from '@/utils/const'
 
-  const isRoot = ref(true)
   const route = useRoute()
+  const isRoot = ref(true)
 
   watch(() => route.fullPath, (value) => {
     isRoot.value = value === PAGE.INDEX
