@@ -15,7 +15,7 @@
       </template>
     </ElCol>
     <ElCol
-      v-show="movies.length > 0"
+      v-show="showResults"
       :lg="18"
       :xl="14"
     >
@@ -58,6 +58,7 @@
         updateMovies(response.Search as Movie[])
       } else {
         isNoResults.value = true
+        updateMovies([])
       }
     }).catch((err) => {
       console.warn(err)
@@ -89,4 +90,8 @@
       spaceBetween: 50,
     },
   }
+
+  const showResults = computed(() => {
+    return movies.value.length > 0 && !isNoResults.value && !isLoadingMovies.value
+  })
 </script>
