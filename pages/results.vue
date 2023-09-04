@@ -15,7 +15,7 @@
       </template>
     </ElCol>
     <ElCol
-      v-show="movies.length > 0"
+      v-show="showResults"
       :lg="18"
       :xl="14"
     >
@@ -50,6 +50,7 @@
       } else {
         updateIsLoadingMovies(false)
         isNoResults.value = true
+        updateMovies([])
       }
     })
   })
@@ -58,5 +59,29 @@
     if (Array.isArray(newVal) && newVal.length > 0) {
       loading.value = false
     }
+  })
+
+  const goToMoviePage = (id: string) =>  {
+    return navigateTo({
+      path: `/movie/details`,
+      query: {
+        id,
+      }
+    })
+  }
+
+  const breakpoints = {
+    '640': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '1024': {
+      slidesPerView: 3,
+      spaceBetween: 50,
+    },
+  }
+
+  const showResults = computed(() => {
+    return movies.value.length > 0 && !isNoResults.value && !isLoadingMovies.value
   })
 </script>
