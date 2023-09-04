@@ -4,36 +4,14 @@
     :navigation="true"
     :modules="[SwiperNavigation]"
   >
-    <SwiperSlide v-for="(movie, i) in movies" :key="i">
-      <ResultsCard
-        :movie="movie"
-        @click="goToMoviePage(movie.Title)"
-      />
+    <SwiperSlide v-for="(item, i) in data" :key="i">
+      <slot :item="item" index="i"/>
     </SwiperSlide>
   </Swiper>
 </template>
 <script setup lang="ts">
-
-  import { Movie } from '@/types/Movie'
-  const breakpoints = {
-    '640': {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    '1024': {
-      slidesPerView: 3,
-      spaceBetween: 50,
-    },
-  }
-
   const props = defineProps<{
-    movies: Movie[],
+    data: any,
+    breakpoints: any,
   }>()
-
-  function goToMoviePage(title: string) {
-    localStorage.setItem('title', title)
-    return navigateTo({
-      path: `/movie/details`,
-    })
-  }
 </script>

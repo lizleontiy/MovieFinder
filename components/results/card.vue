@@ -4,12 +4,11 @@
     :body-style="{ padding: '0px' }"
   >
     <img
-      :src="poster"
+      :src="posterPath"
       class="movie-card__image"
     />
     <div class="movie-card__info">
-      <p>{{ movie.Title }}</p>
-      <p>{{ movie.Year }}</p>
+      <p>{{ movie.Title }} ({{ movie.Year }})</p>
     </div>
   </ElCard>
 </template>
@@ -20,16 +19,10 @@
   const props = defineProps<{
     movie: Movie
   }>()
-  const placeholder = '/img/placeholder.png'
-
-  const isPosterAvailable = computed(() => {
-    return props.movie.Poster !== 'N/A'
-  })
-  const poster = computed(() => {
-    return isPosterAvailable.value ? props.movie.Poster : placeholder
-  })
+  const poster = isEmptyField(props.movie.Poster) ? undefined : props.movie.Poster
+  const posterPath = usePoster(poster)
 </script>
 
 <style lang="scss">
-@import "~/assets/style/movie-card.scss";
+@import "~/assets/style/components/movie-card.scss"
 </style>
