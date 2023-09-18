@@ -3,10 +3,9 @@
     <Title>Results</Title>
   </Head>
   <ElRow
-    v-loading="isLoadingMovies"
     justify="center"
   >
-    <ElCol v-if="!isLoadingMovies">
+    <ElCol>
       <h1 class="page-title" v-if="!isNoResults">
         Results
       </h1>
@@ -20,11 +19,12 @@
       :xl="14"
     >
       <ResultsCarousel
-        v-slot="{item}"
+        v-slot="{item, inited}"
         :data="movies"
         :breakpoints="breakpoints"
-      >
+        >
         <ResultsCard
+          v-if="inited"
           :movie="item"
           @click="goToMoviePage(item.imdbID)"
         />
@@ -44,31 +44,20 @@
 
   const route = useRoute()
   const movieStore = useMoviesStore()
-  const { movies, isLoadingMovies } = storeToRefs(movieStore)
-  const { updateIsLoadingMovies, updateMovies } = movieStore
-  const loading = ref(true)
+  const { movies } = storeToRefs(movieStore)
+  const { updateMovies } = movieStore
   const isNoResults = ref(false)
 
-  onMounted(() => {
-    updateIsLoadingMovies(true)
-    useMovieSearch<MovieResponse>({s: route.query.search}).then((data: MovieResponse) => {
-      const response: MovieResponse = data
-      updateIsLoadingMovies(false)
-      if (response.Response === 'True') {
-        updateMovies(response.Search as Movie[])
-      } else {
-        isNoResults.value = true
-        updateMovies([])
-      }
-    }).catch((err) => {
-      console.warn(err)
-    })
-  })
-
-  watch(movies, (newVal) => {
-    if (Array.isArray(newVal) && newVal.length > 0) {
-      loading.value = false
+  useMovieSearch<MovieResponse>({s: route.query.search}).then(({data}) => {
+    if (data?.value?.Response === 'True') {
+      updateMovies(data.value.Search as Movie[])
+    } else {
+      isNoResults.value = true
+      updateMovies([])
     }
+  })
+  .catch(({error}) => {
+    console.warn(error)
   })
 
   const goToMoviePage = (id: string) =>  {
@@ -92,6 +81,6 @@
   }
 
   const showResults = computed(() => {
-    return movies.value.length > 0 && !isNoResults.value && !isLoadingMovies.value
+    return movies.value.length > 0 && !isNoResults.value
   })
 </script>
