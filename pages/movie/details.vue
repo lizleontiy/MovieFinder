@@ -3,11 +3,9 @@
     <Title>Details</Title>
   </Head>
   <ElRow
-    v-loading="isLoadingMovieDetails"
     justify="center"
   >
     <ElCol
-      v-if="!isLoadingMovieDetails"
       :xs="24"
       :md="20"
       :lg="14"
@@ -64,29 +62,24 @@
   const movieStore = useMoviesStore()
   const movieTitle = ref<string | LocationQueryValue[]>('')
   const movieDetails = ref<MovieDetails>({} as MovieDetails)
-  const { updateIsLoadingMovieDetails } = movieStore
-  const { isLoadingMovieDetails } = storeToRefs(movieStore)
   const isNoResults = ref(false)
   const poster = ref('')
-  onMounted(() => {
-    movieTitle.value = route.query.id || ''
-    updateIsLoadingMovieDetails(true)
-    useMovieSearch<MovieDetails>({i: movieTitle.value}).then(({Title, Year, Director, Poster, Response}) => {
-      if (Response === 'True') {
-        isNoResults.value = false
-        updateIsLoadingMovieDetails(false)
-        movieDetails.value.Title = Title
-        movieDetails.value.Year = isEmptyField(Year) ? undefined : Year
-        movieDetails.value.Director = isEmptyField(Director) ? undefined : Director
-        movieDetails.value.Poster = isEmptyField(Poster) ? undefined : Poster
-        poster.value = usePoster(movieDetails.value.Poster)
-      } else {
-        isNoResults.value = true
-        updateIsLoadingMovieDetails(false)
-      }
-    }).catch((err) => {
-      console.warn(err)
-    })
+  movieTitle.value = route.query.id || ''
+
+  useMovieSearch<MovieDetails>({i: movieTitle.value}).then(({ data }) => {
+    if (data?.value?.Response === 'True') {
+      isNoResults.value = false
+      movieDetails.value.Title = data.value.Title
+      movieDetails.value.Year = isEmptyField(data.value.Year) ? undefined : data.value.Year
+      movieDetails.value.Director = isEmptyField(data.value.Director) ? undefined : data.value.Director
+      movieDetails.value.Poster = isEmptyField(data.value.Poster) ? undefined : data.value.Poster
+      poster.value = usePoster(movieDetails.value.Poster)
+    } else {
+      isNoResults.value = true
+    }
+  })
+  .catch(({error}) => {
+    console.warn(error)
   })
 </script>
 
