@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   ],
   modules: [
     ['@pinia/nuxt', { disableVuex: true }],
+    '@nuxtjs/eslint-module',
     '@element-plus/nuxt',
     'nuxt-swiper',
   ],
@@ -22,5 +23,5 @@ export default defineNuxtConfig({
   },
   swiper: {
     modules: ['navigation']
-  }
+  },
 })

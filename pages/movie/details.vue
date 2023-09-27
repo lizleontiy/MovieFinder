@@ -11,7 +11,7 @@
       :lg="14"
       :xl="8"
     >
-      <h1 
+      <h1
         v-if="!isNoResults"
         class="page-title"
       >
@@ -20,26 +20,41 @@
       <template v-else>
         <NoResults/>
       </template>
-      <ElCard class="box-card" v-if="!isNoResults">
+      <ElCard
+        v-if="!isNoResults"
+        class="box-card"
+      >
         <ElRow
           justify="space-between"
         >
-          <ElCol :sm="10" :md="8">
+          <ElCol
+            :sm="10"
+            :md="8"
+          >
             <el-image
               style="width: 100%; height: 100%"
               :src="poster"
               fit="contain"
             />
           </ElCol>
-          <ElCol :sm="13" :md="15">
+          <ElCol
+            :sm="13"
+            :md="15"
+          >
             <h2 class="details__title">
               {{ movieDetails.Title }}
             </h2>
-            <ElText tag="p" v-if="movieDetails.Director">
+            <ElText
+              v-if="movieDetails.Director"
+              tag="p"
+            >
               Director: {{ movieDetails.Director }}
             </ElText>
-            <br/>
-            <ElText tag="p" v-if="movieDetails.Year">
+            <br>
+            <ElText
+              v-if="movieDetails.Year"
+              tag="p"
+            >
               Year: {{ movieDetails.Year }}
             </ElText>
           </ElCol>
@@ -53,13 +68,10 @@
   definePageMeta({
     layout: 'default'
   })
-  import { storeToRefs } from 'pinia'
   import { MovieDetails } from '@/types/MovieDetails'
-  import { useMoviesStore } from '@/stores/movies'
   import { LocationQueryValue } from '#vue-router'
 
   const route = useRoute()
-  const movieStore = useMoviesStore()
   const movieTitle = ref<string | LocationQueryValue[]>('')
   const movieDetails = ref<MovieDetails>({} as MovieDetails)
   const isNoResults = ref(false)

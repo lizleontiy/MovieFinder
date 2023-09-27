@@ -2,10 +2,17 @@
   <ElHeader class="header">
     <ElRow align="middle">
       <ElCol>
-        <p class="header__bg header__title" v-if="isRoot">
+        <p
+          v-if="isRoot"
+          class="header__bg header__title"
+        >
           MovieFinder
         </p>
-        <NuxtLink to="/" class="header__link" v-else>
+        <NuxtLink
+          v-else
+          to="/"
+          class="header__link"
+        >
           <p class="header__bg header__title">
             MovieFinder
           </p>

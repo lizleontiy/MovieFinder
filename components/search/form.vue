@@ -7,8 +7,8 @@
   >
     <ElFormItem prop="search">
       <ElInput
-        placeholder="Search..."
         v-model="form.search"
+        placeholder="Search..."
         @keydown.enter.prevent="submitForm(formRef)"
       >
         <template #append>

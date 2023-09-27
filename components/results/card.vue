@@ -6,7 +6,7 @@
     <img
       :src="posterPath"
       class="movie-card__image"
-    />
+    >
     <div class="movie-card__info">
       <p>{{ movie.Title }} ({{ movie.Year }})</p>
     </div>

@@ -34,7 +34,7 @@
       prop="poster"
       label="Poster"
     >
-      <el-upload
+      <ElUpload
         ref="uploadRef"
         :limit="1"
         :auto-upload="false"
@@ -42,21 +42,23 @@
         :on-remove="handleRemove"
       >
         <template #trigger>
-          <el-button
+          <ElButton
             type="primary"
             text
             bg
           >
             select file
-          </el-button>
+          </ElButton>
         </template>
-      </el-upload>
+      </ElUpload>
     </ElFormItem>
     <ElButton
       type="primary"
       size="large"
       @click="submitForm(formRef)"
-    >Create</ElButton>
+    >
+      Create
+    </ElButton>
   </ElForm>
 </template>
 
@@ -74,7 +76,7 @@
   })
   const formRef = ref<FormInstance>()
   const uploadRef = ref<UploadInstance>()
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rules = reactive<FormRules<MovieForm<any>>>({
     title: [
       { required: true, message: 'Please fill input', trigger: 'blur' },

@@ -6,7 +6,10 @@
     justify="center"
   >
     <ElCol>
-      <h1 class="page-title" v-if="!isNoResults">
+      <h1
+        v-if="!isNoResults"
+        class="page-title"
+      >
         Results
       </h1>
       <template v-else>
@@ -22,7 +25,7 @@
         v-slot="{item, inited}"
         :data="movies"
         :breakpoints="breakpoints"
-        >
+      >
         <ResultsCard
           v-if="inited"
           :movie="item"

@@ -8,7 +8,7 @@
     <SwiperSlide
       v-for="(item, i) in data"
       :key="i"
-  >
+    >
       <slot
         :item="item"
         index="i"
