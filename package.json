@@ -12,12 +12,20 @@
     "start": "nuxt start"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
     "@element-plus/nuxt": "^1.0.5",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@types/node": "^18.17.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
     "element-plus": "^2.3.9",
-    "nuxt": "^3.6.5",
-    "sass": "^1.66.1"
+    "eslint": "^8.50.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "nuxt": "3.6.5",
+    "sass": "^1.66.1",
+    "typescript": "^5.2.2"
   },
   "author": "Yelyzaveta Leontiy",
   "engines": {
