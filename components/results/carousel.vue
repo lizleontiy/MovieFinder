@@ -19,10 +19,12 @@
 </template>
 <script setup lang="ts">
   let inited = ref(false)
-  const props = defineProps<{
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  defineProps<{
     data: any,
     breakpoints: any,
   }>()
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const onInit = () => {
     inited.value = true
