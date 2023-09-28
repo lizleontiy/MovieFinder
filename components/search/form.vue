@@ -39,7 +39,7 @@
       { min: 3, message: 'Length should be more than 3', trigger: 'blur' },
     ],
   })
-  
+
   const onSuccess = () => {
     return navigateTo({
       path: PAGE.RESULTS,
