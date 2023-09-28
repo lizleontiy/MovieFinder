@@ -3,6 +3,6 @@
     <h1 class="page-title">
       Add movie
     </h1>
-    <MovieForm/>
+    <slot/>
   </ElCard>
 </template>

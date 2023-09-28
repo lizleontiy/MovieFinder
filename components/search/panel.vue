@@ -3,7 +3,7 @@
     <h1 class="page-title">
       Let's find a movie!
     </h1>
-    <SearchForm/>
+    <slot/>
   </ElCard>
 </template>
 

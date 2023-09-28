@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
   definePageMeta({
-    layout: 'default'
+    layout: 'default',
   })
 
   import { MovieResponse, Movie } from '@/types/Movie'
@@ -68,7 +68,7 @@
       path: `/movie/details`,
       query: {
         id,
-      }
+      },
     })
   }
 

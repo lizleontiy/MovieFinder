@@ -32,6 +32,6 @@
     isRoot.value = value === PAGE.INDEX
   }, {
     deep: true,
-    immediate: true
+    immediate: true,
   })
 </script>

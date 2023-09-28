@@ -6,8 +6,8 @@
     @swiper="onInit"
   >
     <SwiperSlide
-      v-for="(item, i) in data"
-      :key="i"
+      v-for="item in data"
+      :key="item.imdbID"
     >
       <slot
         :item="item"

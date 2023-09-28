@@ -1,7 +1,7 @@
 <template>
   <ElForm
     ref="formRef"
-    :model="form"
+    :model="localFormData"
     :rules="rules"
     class="demo-ruleForm"
     :label-position="'top'"
@@ -11,7 +11,7 @@
       label="Title"
     >
       <ElInput
-        v-model="form.title"
+        v-model="localFormData.title"
       />
     </ElFormItem>
     <ElFormItem
@@ -19,7 +19,7 @@
       label="Year"
     >
       <ElInput
-        v-model.number="form.year"
+        v-model.number="localFormData.year"
       />
     </ElFormItem>
     <ElFormItem
@@ -27,7 +27,7 @@
       label="Director"
     >
       <ElInput
-        v-model="form.director"
+        v-model="localFormData.director"
       />
     </ElFormItem>
     <ElFormItem
@@ -55,7 +55,7 @@
     <ElButton
       type="primary"
       size="large"
-      @click="submitForm(formRef)"
+      @click="validate"
     >
       Create
     </ElButton>
@@ -64,27 +64,29 @@
 
 <script setup lang="ts">
   import { reactive, ref } from 'vue'
-  import { FormRules, FormInstance, UploadFile, UploadInstance, ElNotification } from 'element-plus'
-  import { MovieForm } from '@/types/MovieForm'
+  import { FormRules, FormInstance, UploadFile, UploadInstance } from 'element-plus'
+  import { MovieFormData } from '@/types/MovieForm'
   import { posterValidator } from '@/utils/posterValidator'
 
-  const form = ref<MovieForm<UploadFile>>({
-    title: '',
-    year: '',
-    director: '',
-    poster: {} as UploadFile,
-  })
+  const props = defineProps<{
+    form: MovieFormData<UploadFile>,
+  }>()
+
+  const emit = defineEmits<{
+    submit: [value: MovieFormData<UploadFile>],
+  }>()
+  const localFormData = ref<MovieFormData<UploadFile>>({ ...props.form })
   const formRef = ref<FormInstance>()
   const uploadRef = ref<UploadInstance>()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rules = reactive<FormRules<MovieForm<any>>>({
+  const rules = reactive<FormRules<MovieFormData<any>>>({
     title: [
       { required: true, message: 'Please fill input', trigger: 'blur' },
       { min: 3, message: 'Length should be more than 3', trigger: 'blur' },
     ],
     year: [
       { required: true, message: 'Please fill input', trigger: 'blur' },
-      { type: 'number', message: 'Year must be a number' }
+      { type: 'number', message: 'Year must be a number' },
     ],
     director: [
       { required: true, message: 'Please fill input', trigger: 'blur' },
@@ -94,30 +96,34 @@
     ],
   })
 
+  watch(
+    () => props.form,
+    (val) => (localFormData.value = val),
+    { deep: true }
+  )
+
   const resetForm = () => {
-    form.value.title = ''
-    form.value.director = ''
-    form.value.year = ''
-    form.value.poster = {} as UploadFile
+    localFormData.value.title = ''
+    localFormData.value.director = ''
+    localFormData.value.year = ''
+    localFormData.value.poster = {} as UploadFile
     uploadRef?.value?.clearFiles()
   }
 
   const addPoster = (e: UploadFile) => {
-    form.value.poster = e
+    localFormData.value.poster = e
   }
 
   const handleRemove = () => {
-    form.value.poster = {} as UploadFile
+    localFormData.value.poster = {} as UploadFile
   }
 
-  const onSuccess = () => {
+  const validate = async () => {
+    const valid = await useValidateForm(formRef.value)
+    if (!valid) {
+      return
+    }
     resetForm()
-    ElNotification.success({
-      title: 'Info',
-      message: 'Your movie was accepted!',
-      showClose: false,
-    })
+    emit('submit', localFormData.value)
   }
-
-  const submitForm = useSubmitForm(onSuccess)
 </script>
