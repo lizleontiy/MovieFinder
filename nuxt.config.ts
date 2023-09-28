@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     '~/assets/style/reset.scss',
     '~/assets/style/general.scss',
     '~/assets/style/layout/header.scss',
-    '~/assets/style/layout/footer.scss'
+    '~/assets/style/layout/footer.scss',
   ],
   modules: [
     ['@pinia/nuxt', { disableVuex: true }],
@@ -18,10 +18,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       OMDB_API_KEY: '30468e4f',
-      OMDB_PATH: 'http://www.omdbapi.com/'
-    }
+      OMDB_PATH: 'http://www.omdbapi.com/',
+    },
   },
   swiper: {
-    modules: ['navigation']
+    modules: ['navigation'],
   },
 })

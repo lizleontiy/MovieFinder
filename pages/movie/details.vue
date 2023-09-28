@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
   definePageMeta({
-    layout: 'default'
+    layout: 'default',
   })
   import { MovieDetails } from '@/types/MovieDetails'
   import { LocationQueryValue } from '#vue-router'

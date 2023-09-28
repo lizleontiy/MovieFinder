@@ -15,6 +15,6 @@
 
 <script setup>
   const style = {
-    backgroundImage: 'url(/img/denise-jans-RM-5zzFsR2I-unsplash.jpg)'
+    backgroundImage: 'url(/img/denise-jans-RM-5zzFsR2I-unsplash.jpg)',
   }
 </script>

@@ -21,6 +21,13 @@
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-trailing-spaces": "error",
     "yoda": "error",
-    "eqeqeq": "error"
+    "eqeqeq": "error",
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "never",
+      "exports": "never",
+      "functions": "never"
+    }]
   }
 }
