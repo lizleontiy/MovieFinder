@@ -63,8 +63,10 @@
 </template>
 
 <script setup lang="ts">
-  import { FormInstance, UploadFile, UploadInstance } from 'element-plus'
+  import { reactive, ref } from 'vue'
+  import { FormRules, FormInstance, UploadFile, UploadInstance } from 'element-plus'
   import { MovieFormData } from '@/types/MovieForm'
+  import { posterValidator } from '@/utils/posterValidator'
 
   const props = defineProps<{
     form: MovieFormData<UploadFile>,
@@ -76,7 +78,23 @@
   const localFormData = ref<MovieFormData<UploadFile>>({ ...props.form })
   const formRef = ref<FormInstance>()
   const uploadRef = ref<UploadInstance>()
-  const rules = useMovieFormValidation()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rules = reactive<FormRules<MovieFormData<any>>>({
+    title: [
+      { required: true, message: 'Please fill input', trigger: 'blur' },
+      { min: 3, message: 'Length should be more than 3', trigger: 'blur' },
+    ],
+    year: [
+      { required: true, message: 'Please fill input', trigger: 'blur' },
+      { type: 'number', message: 'Year must be a number' },
+    ],
+    director: [
+      { required: true, message: 'Please fill input', trigger: 'blur' },
+    ],
+    poster: [
+      { validator: posterValidator, trigger: 'blur' },
+    ],
+  })
 
   watch(
     () => props.form,
