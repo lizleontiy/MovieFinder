@@ -23,8 +23,7 @@
 
 <script setup lang="ts">
   import { Search } from '@element-plus/icons-vue'
-  import { reactive, ref } from 'vue'
-  import type { FormRules, FormInstance } from 'element-plus'
+  import type { FormInstance } from 'element-plus'
   import { SearchFormData } from '@/types/Search'
 
   const props = defineProps<{
@@ -37,12 +36,7 @@
 
   const localFormData = ref({ ...props.form })
   const formRef = ref<FormInstance>()
-  const rules = reactive<FormRules<SearchFormData>>({
-    search: [
-      { required: true, message: 'Please fill input', trigger: 'blur' },
-      { min: 3, message: 'Length should be more than 3 letters', trigger: 'blur' },
-    ],
-  })
+  const rules = useSearchFormValidation()
 
   watch(
     () => props.form,
